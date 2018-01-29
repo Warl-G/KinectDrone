@@ -1,0 +1,36 @@
+﻿<Window x:Class="KinectDrone.Guide"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Guide" Height="600" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="61*" />
+            <RowDefinition Height="452*"/>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1" Background="White">
+            <Label Content="Guide" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" FontWeight="Black"/>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" MinWidth="100" />
+                <ColumnDefinition Width="*" MinWidth="100" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Vertical" >
+                <Button Name="TakeoffandLandButton" Background="AliceBlue" Height="100" Content="Take Off/Land"/>
+                <Button Name="FordwardsButton" Background="AliceBlue" Height="100" Content="Forwards"/>
+                <Button Name="LeftButton" Background="AliceBlue" Height="100" Content="Left"/>
+                <Button Name="UpButton" Background="AliceBlue" Height="100" Content="Up" />
+                <Button Name="RotateButton" Background="AliceBlue" Height="100" Content="Rotate"  />
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Vertical">
+                <Button Name="FlipButton" Background="AliceBlue" Height="100" Content="Flip"/>
+                <Button Name="BackwardsButton" Background="AliceBlue" Height="100" Content="Backwards"/>
+                <Button Name="RightButton" Background="AliceBlue" Height="100" Content="Right"/>
+                <Button Name="DownButton" Background="AliceBlue" Height="100" Content="Down"/>
+                <Button Name="FlatTrimButton" Background="AliceBlue" Height="100" Content="Flat&#x0a;Trim"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

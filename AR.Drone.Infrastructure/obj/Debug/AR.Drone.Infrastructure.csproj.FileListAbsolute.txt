@@ -1,0 +1,10 @@
+C:/GRPersonal/Drone/Firefly-master/AR.Drone.Infrastructure/bin/Debug/AR.Drone.Infrastructure.dll
+C:/GRPersonal/Drone/Firefly-master/AR.Drone.Infrastructure/bin/Debug/AR.Drone.Infrastructure.pdb
+C:/GRPersonal/Drone/Firefly-master/AR.Drone.Infrastructure/obj/Debug/AR.Drone.Infrastructure.csprojResolveAssemblyReference.cache
+C:/GRPersonal/Drone/Firefly-master/AR.Drone.Infrastructure/obj/Debug/AR.Drone.Infrastructure.dll
+C:/GRPersonal/Drone/Firefly-master/AR.Drone.Infrastructure/obj/Debug/AR.Drone.Infrastructure.pdb
+C:/GRPersonal/Drone/work/KinectDrone/AR.Drone.Infrastructure/bin/Debug/AR.Drone.Infrastructure.dll
+C:/GRPersonal/Drone/work/KinectDrone/AR.Drone.Infrastructure/bin/Debug/AR.Drone.Infrastructure.pdb
+C:/GRPersonal/Drone/work/KinectDrone/AR.Drone.Infrastructure/obj/Debug/AR.Drone.Infrastructure.csprojResolveAssemblyReference.cache
+C:/GRPersonal/Drone/work/KinectDrone/AR.Drone.Infrastructure/obj/Debug/AR.Drone.Infrastructure.dll
+C:/GRPersonal/Drone/work/KinectDrone/AR.Drone.Infrastructure/obj/Debug/AR.Drone.Infrastructure.pdb

@@ -1,0 +1,173 @@
+﻿<Window
+    
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" 
+        x:Class="KinectDrone.MainWindow"
+        Title="KinectDrone" Height="720" Width="1080" WindowState="Normal" WindowStartupLocation="Manual"
+        Background="LightSeaGreen"
+    Loaded="MainWindow_Loaded"
+        Closing="MainWindow_Closing"
+    xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+    xmlns:system ="clr-namespace:System;assembly=mscorlib"
+    xmlns:local ="clr-namespace:AR.Drone.Client.Configuration;assembly=AR.Drone.Client"
+    >
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="MediumGreyBrush" Color="#ff6e6e6e" />
+        <SolidColorBrush x:Key="KinectPurpleBrush" Color="#ff52318f" />
+        <SolidColorBrush x:Key="KinectBlueBrush" Color="#ff00BCF2" />
+
+
+    </Window.Resources>
+
+
+    <Grid Margin="10,0,10,1" Name="MainGrid" d:IsLocked="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="61*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" 
+            Content="KinectDrone" HorizontalAlignment="center"   VerticalAlignment="Center"
+               FontSize="24" FontWeight="Black" RenderTransformOrigin="-0.038,0.475" Margin="306,20,286,8" Width="180" d:IsLocked="True"/>
+
+        <Grid Grid.Row="1" ShowGridLines="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200*" MinWidth="290" Name="KinectRow" />
+                <ColumnDefinition Width="600*" Name="ARDroneRow"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" HorizontalAlignment="Left" Width="280" >
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="60*"/>
+                    <RowDefinition Height="60*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" HorizontalAlignment="Center" Margin="74,0,70,0" Width="136">
+                    <Label  Content="Kinect" HorizontalAlignment="Center" FontSize="18" d:IsLocked="True"/>
+                    <Ellipse HorizontalAlignment="Left" VerticalAlignment="Center" Height="22" Width="22" Name="KinectEllipse" Fill="Red" Margin="0,6,0,5"  />
+                </Grid>
+                <Viewbox Grid.Row="1"  Height="280">
+                    <Image Name="KinectImage" Stretch="UniformToFill" Width="280" Height="280" Margin="5,5,5,5" Source="{Binding KinectImageSource}" />
+
+                </Viewbox>
+
+                <Label Grid.Row="2" Content="Command:" FontSize="24" FontWeight="Black" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="69,10,70,0"/>
+                <TextBlock Name="CommandTextBlock" Grid.Row="2" Text="None"  FontSize="24" TextAlignment="Center" FontWeight="Black" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="10,0,10,26" Width="260" Height="57"/>
+
+                <Button Grid.Row="3" Name="Start" Content="Start" VerticalAlignment="Center" HorizontalAlignment="Center" Height="50" Width="80" Click="Start_Click" Margin="100,10,100,93" />
+                <Button Grid.Row="3" Name="Emergency" Content="Emergency" VerticalAlignment="Center" HorizontalAlignment="Left" Height="50" Width="80" Margin="0,10,0,93" Click="Emergency_Click" />
+                <Button Grid.Row="3" Name="Guide" Content="Guide" HorizontalAlignment="Center" Height="50" Width="80" VerticalAlignment="Center" Click="Guide_Click" Margin="100,79,100,25"/>
+                <Button Grid.Row="3" Name="SwitchCamera" Content="Switch&#x0a;Camera" HorizontalAlignment="Right" Height="50" Width="80" VerticalAlignment="Center" Click="SwitchCamera_Click" Margin="0,10,0,93"/>
+                <StatusBar Grid.Row="3" HorizontalAlignment="Stretch" Name="statusBar" VerticalAlignment="Bottom"  Foreground="{StaticResource MediumGreyBrush}">
+                    <StatusBarItem Content="{Binding StatusText}" Background="Wheat"/>
+                </StatusBar>
+            </Grid>
+            <Grid Grid.Column="1" HorizontalAlignment="Right" Width="769" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Margin="10,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="2" Width="140" HorizontalAlignment="Right" Margin="0,0,-613,0">
+                        <ProgressBar Name="BatteryBar" Margin="62,5,15,5" Foreground="White" Background="Green" Value="{Binding BatteryValue}"></ProgressBar>
+                        <Label Name="BatteryLabel"  HorizontalAlignment="Right" FontSize="18" Width="38" Height="34" VerticalAlignment="Center" Content="{Binding BatteryValue}" Margin="0,3,92,0" />
+                    </Grid>
+                    <Grid Grid.Column="2" Width="126"  HorizontalAlignment="Center" Margin="328,0,-321,0">
+                        <Ellipse HorizontalAlignment="Left" VerticalAlignment="Center" Height="22" Width="22" Name="DroneEllipse" Fill="Red" />
+                        <Label  Content="Drone" HorizontalAlignment="Center" FontSize="18" d:IsLocked="True"/>
+                    </Grid>
+                    <Grid Grid.Column="2" HorizontalAlignment="Left" Margin="0,0,-614,0" Width="145">
+                        <Label  Name="AltitudeLabel"   HorizontalAlignment="Right" FontSize="18" Width="135"   />
+
+                    </Grid>
+
+                </Grid>
+                <Viewbox Grid.Row="1" Margin="10,1,10,0"  >
+                    <Image  Height="332" Width="640"  Name="DroneImage" Source="{Binding DroneImageSource}" Margin="5,5,5,5"  Stretch="UniformToFill" />
+                </Viewbox>
+
+                <Grid Grid.Row="2" Margin="0,0,10,0" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="LeftUpButton" Content="Up" Width="100" IsEnabled="False"/>
+                        <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="LeftCenter1Button" Content="Center" Width="100" IsEnabled="False"/>
+                        <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="LeftDownButton" Content="Down" Width="100" IsEnabled="False" Margin="0,0,40,0"/>
+                        <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="RightUpButton" Content="Up" Width="100" IsEnabled="False"/>
+                        <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="RightCenter1Button" Content="Center" Width="100" IsEnabled="False"/>
+                        <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="RightDownButton" Content="Down" Width="100" IsEnabled="False"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="LeftLeftButton" Content="Left" Width="100" IsEnabled="False"/>
+                        <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="LeftCenter2Button" Content="Center" Width="100" IsEnabled="False"/>
+                        <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="LeftRightButton" Content="Right" Width="100" IsEnabled="False" Margin="0,0,40,0"/>
+                        <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="RightLeftButton" Content="Left" Width="100" IsEnabled="False"/>
+                        <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="RightCenter2Button" Content="Center" Width="100" IsEnabled="False"/>
+                        <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="RightRightButton" Content="Right" Width="100" IsEnabled="False"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="LeftFordwardsButton" Content="Forwards" Width="100" IsEnabled="False"/>
+                        <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="LeftCenter3Button" Content="Center" Width="100" IsEnabled="False"/>
+                        <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="LeftBackwardsButton" Content="Backwards" Width="100" IsEnabled="False"  Margin="0,0,40,0"/>
+                        <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="RightFordwardsButton" Content="Forwards" Width="100" IsEnabled="False"/>
+                        <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="RightCenter3Button" Content="Center" Width="100" IsEnabled="False"/>
+                        <Button Background="{DynamicResource KinectPurpleBrush}" BorderBrush="{DynamicResource MediumGreyBrush}" Foreground="White" Name="RightBackwardsButton" Content="Backwards" Width="100" IsEnabled="False"/>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="3" Margin="-18,0,10,0" HorizontalAlignment="Right" Width="777" Height="121" VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" Width="229" Margin="10,0,0,0" d:IsLocked="True"  >
+
+                        <CheckBox  x:Name="FaceDectectCheck" Content="   FaceDectect" FontSize="16" Margin="36,10,26,12" VerticalAlignment="Center" Background="{x:Null}" Height="20"/>
+
+                        <CheckBox  x:Name="FlightWithoutShell" Content="   FlightWithoutShell" FontSize="16" Margin="36,10,8,12" VerticalAlignment="Center" Background="{x:Null}" Height="20" Checked="FlightWithoutShell_Checked" Unchecked="FlightWithoutShell_Unchecked"/>
+                        <CheckBox  x:Name="OutDoor" Content="   OutDoor" FontSize="16" Margin="36,10,26,12" VerticalAlignment="Center" Background="{x:Null}" Height="20" Checked="OutDoor_Checked" Unchecked="OutDoor_Unchecked"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left" Width="256" d:IsLocked="True"  >
+                        <StackPanel  Orientation="Horizontal" Height="50" VerticalAlignment="Center">
+                            <CheckBox  x:Name="LedCheck" VerticalAlignment="Center" FontSize="16" Margin="10,0" Background="{x:Null}" Height="30" Checked="LedCheck_Checked" Unchecked="LedCheck_Unchecked" Width="24"/>
+                            <ComboBox  x:Name="LedAnimationCB" FontSize="18" Height="30" SelectionChanged="LedAnimationCB_SelectionChanged" Width="205"/>
+                        </StackPanel>
+                        <StackPanel  Orientation="Horizontal" Height="50">
+                            <CheckBox  x:Name="FlightCheck" VerticalAlignment="Center" FontSize="16" Margin="10,0" Background="{x:Null}" Height="30" Checked="FlightCheck_Checked" Unchecked="FlightCheck_Unchecked" Width="24"/>
+                            <ComboBox  x:Name="FlightAnimationCB" FontSize="18" Height="30" SelectionChanged="FlightAnimationCB_SelectionChanged" Width="205"/>
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <Grid Grid.Column="3" Margin="196,0,-196,0"/>
+                    <Button Content="testButton1" Margin="12,6,-72,0" Click="Button_Click" Grid.Column="2" Height="50" VerticalAlignment="Top"/>
+                    <Button Content="testButton2" Margin="12,61,-72,25" Click="Button_Click_1" Grid.Column="2" Height="50" VerticalAlignment="Bottom"/>
+                </Grid>
+
+
+
+            </Grid>
+
+        </Grid>
+
+
+    </Grid>
+
+</Window>
+    
