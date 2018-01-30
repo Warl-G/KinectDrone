@@ -1,6 +1,6 @@
 # KinectDrone
-(https://github.com/guoru123/KinectDrone/raw/master/Mannual/WechatIMG3.jpeg)
-(https://github.com/guoru123/KinectDrone/raw/master/Mannual/WechatIMG4.jpeg)
+(https://github.com/guoru123/KinectDrone/raw/master/Mannual/KinectDrone.png)
+(https://github.com/guoru123/KinectDrone/raw/master/Mannual/DroneVideo.png)
 Ar.drone飞行器Kinect文档
 一、    开发环境
 Visual Studio 2013及以上
